@@ -10,13 +10,9 @@ async function main() {
     const response = await axios.get(endpoint)
     const flys = response.data
 
-    const fare = getStatusList(flys, 'fare')
-
     log.info('STEP 1: Agrupar pelo tipo da tarifa')
     const fareStatusGroups = getGroupByStatusAndValue(flys, 'fare')
     log.debug(JSON.stringify(fareStatusGroups))
-    // console.log(Object.keys(fareStatusGroups).length)
-    // console.log(flys.length)
 
     let flysGroups = []
     for (const key in fareStatusGroups) {
@@ -47,7 +43,7 @@ async function main() {
     log.info(`STEP 5: Grupos de voo`)
     log.debug(JSON.stringify(flysGroups))
 
-    const {cheapestPrice, cheapestGroup} = getcheapestPriceandGroup(flysGroups)
+    const {cheapestPrice, unicId} = getcheapestPriceandGroup(flysGroups)
     log.debug(getcheapestPriceandGroup(flysGroups))
 
     return {
@@ -56,7 +52,7 @@ async function main() {
         "totalGroups": flysGroups.length,
         "totalFlights": flys.length,
         "cheapestPrice": cheapestPrice,
-        "cheapestGroup": cheapestGroup
+        "cheapestGroup": unicId
     }
 }
 
