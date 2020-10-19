@@ -45,18 +45,11 @@ async function main() {
 
     const {cheapestPrice, unicId} = getcheapestPriceandGroup(flysGroups)
     log.debug(getcheapestPriceandGroup(flysGroups))
-
-    return {
-        "flights": flys,
-        "groups": flysGroups,
-        "totalGroups": flysGroups.length,
-        "totalFlights": flys.length,
-        "cheapestPrice": cheapestPrice,
-        "cheapestGroup": unicId
-    }
+    
+    return setGroups(flys, flysGroups, cheapestPrice, unicId)
 }
 
-function setGroup(flys, flysGroups, cheapestPrice, cheapestGroup) {
+function setGroups(flys, flysGroups, cheapestPrice, cheapestGroup) {
     return {
         "flights": flys,
         "groups": flysGroups,
